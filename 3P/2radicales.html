@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radicales</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="icon" href="china.ico" type="image/x-icon">
+</head>
+<body class="container mt-5">
+    <h1 class="mb-4">Calcular Radicales</h1>
+    <div class="form-group">
+        <label for="numero">Ingrese un número:</label>
+        <input type="text" class="form-control" id="numero">
+    </div>
+    <button class="btn btn-primary mb-3" onclick="calcularRaicesCuadradas()">Calcular</button>
+
+    <h2>Radicales de <span id="numeroMostrado"></span></h2>
+    <ul id="resultado" class="list-group"></ul>
+
+    <script>
+        function calcularRaicesCuadradas() {
+            var inputNumero = document.getElementById("numero");
+            var numero = parseFloat(inputNumero.value);
+
+            if (isNaN(numero)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Por favor, ingrese un número válido.',
+                });
+                return;
+            }
+
+            document.getElementById("numeroMostrado").innerText = numero;
+
+            var resultadoElement = document.getElementById("resultado");
+            resultadoElement.innerHTML = "";
+
+            // Calcular raíces cuadradas
+            for (var i = 2; i <= 10; i++) {
+                var raizCuadrada = Math.pow(numero, 1/i);
+                
+                var listItem = document.createElement("li");
+                listItem.className = "list-group-item";
+                listItem.innerText = `Raíz cuadrada (${i}ª): ${raizCuadrada.toFixed(4)}`;
+                resultadoElement.appendChild(listItem);
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: '¡Listo!',
+                text: 'Raíces cuadradas calculadas correctamente.',
+            });
+        }
+    </script>
+</body>
+</html>
